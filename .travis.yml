@@ -9,7 +9,7 @@ cache: packages
 env:
   global:
     - LINTR_COMMENT_BOT=false
-    - GITHUB_PAT=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
+    - GITHUB_PAT=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
 r_github_packages:
   - jimhester/lintr
   - leffj/mctoolsr
