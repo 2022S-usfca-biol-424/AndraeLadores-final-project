@@ -12,8 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
-
-Delete this placeholder text, and replace it with your introduction text.
+Throughout the world and including the United States, there are numerous individuals that are deprived of safe and reliable tap water. Cities like Newark, New Jersey and Flint, Michigan are only some examples of the water crisis in the United States [@doi:10.2105/AJPH.2021.306561].
 
 # Methods
 
