@@ -1,6 +1,6 @@
 ---
-title: "Urban Ecology Final Report"
-author: "Don Francisco"
+title: "Bacterial richness in public tap water and sinks of San Francisco's public Pit Stop bathrooms"
+author: "Andrae Ladores"
 date: "April 4, 2022"
 bibliography: references.bib
 csl: ecology.csl
