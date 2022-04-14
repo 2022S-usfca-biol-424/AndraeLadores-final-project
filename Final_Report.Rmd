@@ -29,6 +29,11 @@ The TSA plates used were prepared using 40g/L of tryptic soy agar and placed int
 ## Tubes and Swabbing
 For the data collection, I used 15mL falcon or centrifuge tubes containing 0.75mL phosphate buffered saline (PBS) 1x pH 7.4 which was autoclaved for 30 minutes at 121°C liquid cycle. Inside a Pit Stop bathroom, I used sterile cotton swabs which I would first dip into the PBS filled centrifuge tubes prior to swabbing three locations on the sink: the area around the spout (s1), the drain (s2), and the handle/arm rest area (s3). I would swab for 3-4 seconds and I would immediately place the swab back into its respective tube. For the negative control (c/control), I simply mimicked the same actions when swabbing the sink, but I simply swabbed the air with the same amount of time. For the water (w), I took an empty centrifuge tube without PBS and took a water sample from the automatic sink. For each Pt Stop unit, I had a total of 5 centrifuge tubes: the 3 sink samples, 1 control sample, and 1 water sample. 
 
+## Plating and Counting
+Once I returned from the sample sites with my centrifuge tubes, I vortexed each centrifuge tube for 30-40 seconds. After vortexing, each tube sample (except the water sample) is aliquoted onto its respective TSA plate with a value of 0.075mL. The water sample is aliquoted with the same value of 0.075mL onto a TSA plate, but with 3 technical replicates. Per restroom, there are 7 total plates: 3 plates for the sink samples, 3 plates for the water sample, and 1 plate for the control. Once the samples are plated, approximately 7-12 sterilized glass beads are poured into the plates and each plate is shaken for 15-20 seconds or until the sample on the plate has adequately spread across the area. Once each plate has been thoroughly shaken and spread, the plates are incubated at around 37°C for 5 days.
+
+After the incubation period, the plates are taken out for observation. Each plate is carefully observed and recorded for bacterial richness. I documented the morphology type of each bacteria, the count of each morphology type on the plate, and the overall total bacterial count present on each plate. After each plate is carefully studied and documented, the plate is properly discarded. 
+
 ## Site Locations and Descriptions
 
 Add text here.
