@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
-Throughout the world and including the United States, there are numerous individuals that are deprived of safe and reliable tap water. Cities like Newark, New Jersey and Flint, Michigan are only some examples of the water crisis in the United States [@doi:10.2105/AJPH.2021.306561].
+Throughout the world and including the United States, there are numerous individuals that are deprived of safe and reliable tap water. Cities like Newark, New Jersey and Flint, Michigan are only some examples of the water crisis in the United States [@doi:10.2105/AJPH.2021.306561]. In California, there is a small percentage of public tap water systems that have been found to be in violation at least one point in their time since 2012 [@reese2018does]. Further studies have revealed that water system violations in California transpire in low-income communities, where there are limited resources which makes it difficult to meet the standards, driving the inequitable access to safe tap water [@balazs2012environmental; @doi:10.2105/AJPH.2013.301664].
 
 # Methods
 
