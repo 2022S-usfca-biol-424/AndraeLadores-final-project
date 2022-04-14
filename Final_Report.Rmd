@@ -17,8 +17,10 @@ Besides access to safe public water, public restrooms are a necessity as well. T
 In this study, I focused on the bacterial richness in public tap water of San Francisco's public restrooms (Pit Stop bathrooms) and how they vary regarding population density and the average neighborhood income. Additionally, I tested the pH levels between Outer Richmond's Lake Stow and Lakeshore's Lake Merced to investigate the pH levels between the lakes with differing green space. The study revolves around the use of field collected data across several districts of San Francisco and the use of pre-existing datasets relating to the study of different urban systems. The field collected data consisted of tap water samples of Pit Stop bathrooms along with swab samples of several locations on the sink in the same bathrooms. The publicly-available datasets consisted of information pertaining to San Francisco's average income values along with San Francisco's census data.  
 
 # Methods
+## Location and Pit Stop Restrooms
+As a class group, we decided which districts of San Francisco we wanted to study based on an official San Francisco district map. We concluded to observing Haight (HA), Marina (MA), Outer Richmond (OR), Civic Center (CC), Mission (MI), Bayview (BA), and Lakeshore (LA). We used Professor Zimmerman's R code that randomly plotted points within a neighborhood to determine the exact position we should stop at via bus services.
 
-Add text here.
+Pit Stop bathrooms were the main public bathrooms studied and sampled. In neighborhoods where there were two Pit Stop bathrooms in close proximity to the predetermined bus stop, I sampled both bathrooms (B1 & B2), otherwise, I only sampled a single bathroom. San Francisco Public Work's Pit Stop program supplies the public with safe and sanitized restrooms. Outside or near each unit contains used-needle disposals, animal waste stations, and a regular trash disposal. Inside each restroom contains a hands-free sink, soap, paper towels, toilet, and toilet paper. In addition, each unit gets automatically cleaned after each use and will get manually cleaned by a staff member periodically. 
 
 ## Site Locations and Descriptions
 
