@@ -45,7 +45,42 @@ Add text here.
 
 ## Data Analysis and Statistics
 
-Add text here.
+```{r read-in-bathroom-count}
+# read in entire bathroom count data
+bathroom_count <- read_csv(
+  "data/raw_data/2022_04-27-2022_spring_urban_ecology_data_ bathroom_count.csv")
+```
+
+```{r boxplot-total-colony-count-and-neighborhood}
+# create boxplot with total colony count vs. neighborhood district
+ggplot(data = bathroom_count,
+       aes(x = neighborhood,
+           y = colony_count_per_plate)) +
+  geom_boxplot() +
+  scale_y_log10() +
+  labs (x = "Neighborhood",
+        y = "Total Colony Count",
+        title = "Count of Total Bacterial Colonies On Different Neighborhoods")
+```
+
+```{r run-anova-on-colony-count-and-neighborhood}
+summary(lm(data=bathroom_count, colony_count_per_plate ~ neighborhood))
+```
+
+```{r boxplot-total-colony-count-and-sink-location}
+# create boxplot with total plate count and the different sink locations
+bathroom_count %>%
+  filter(sample %in% c("s1", "s2", "s3")) %>%
+  ggplot(aes(x = sample, y = colony_count_per_plate)) +
+  geom_boxplot() +
+  labs(x = "Sink Location",
+       y = "Total Colony Count",
+       title = 
+         "Count of Total Bacterial Colonies on Different Locations On The Sink")
+
+```
+
+
 
 # Results
 
@@ -63,6 +98,7 @@ library("readr")
 library("ggmap")
 library("tidycensus")
 library("tidyverse")
+census_api_key("90f27dca0437203c57cb264c2b8efccbf7056737")
 ```
 
 # Discussion
