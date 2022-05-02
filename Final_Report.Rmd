@@ -55,12 +55,14 @@ bathroom_count <- read_csv(
 # create boxplot with total colony count vs. neighborhood district
 ggplot(data = bathroom_count,
        aes(x = neighborhood,
-           y = colony_count_per_plate)) +
+           y = colony_count_per_plate,
+           color = neighborhood)) +
   geom_boxplot() +
   scale_y_log10() +
   labs (x = "Neighborhood",
         y = "Total Colony Count",
-        title = "Count of Total Bacterial Colonies On Different Neighborhoods")
+        title = "Count of Total Bacterial Colonies On Different Neighborhoods",
+        scale_fill_manual = 'Neighborhoods')
 ```
 
 ```{r run-anova-on-colony-count-and-neighborhood}
@@ -71,7 +73,7 @@ summary(lm(data=bathroom_count, colony_count_per_plate ~ neighborhood))
 # create boxplot with total plate count and the different sink locations
 bathroom_count %>%
   filter(sample %in% c("s1", "s2", "s3")) %>%
-  ggplot(aes(x = sample, y = colony_count_per_plate)) +
+  ggplot(aes(x = sample, y = colony_count_per_plate, color = sample)) + 
   geom_boxplot() +
   labs(x = "Sink Location",
        y = "Total Colony Count",
@@ -80,6 +82,9 @@ bathroom_count %>%
 
 ```
 
+```{r table-morphology-type-and-morphology-count}
+
+```
 
 
 # Results
