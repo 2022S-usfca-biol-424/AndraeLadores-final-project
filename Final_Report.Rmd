@@ -120,14 +120,39 @@ bathroom_count_barplot <- ggplot(data = bathroom_count_table,
                                        fill = morphotype_id)) +
   geom_bar(stat='identity') +
     scale_fill_manual(values=c("#CDCDC1",
+                               "#CDCD00",
                                "#CDB38B",
-                               "#9FB6CD",
-                               "#CDCD00")) +
+                               "#9FB6CD")) +
     labs(title = "Bacterial Morphotype description and its specific count",
          x = "Morphotype Description",
          y = "Morphotype Count")
 bathroom_count_barplot
 ```
+
+```{r sf-base-map}
+# load in base sf map
+sf_basemap <- ggmap::get_stamenmap(bbox = c(-122.533264,
+                                            37.700984,
+                                            -122.355307,
+                                            37.817383),
+                                   zoom = 13,
+                                   maptype = "terrain")
+
+```
+
+```{r sf-map-of-sampled-bathroom-locations}
+# plot basemap with each bathroom sample location for each neighborhood
+ggmap(sf_basemap) +
+  geom_point(data = bathroom_sample,
+             aes(x = long_dec_degrees,
+                 y = lat_dec_degrees,
+                 color = neighborhood | bathroom_type),
+             size = 6) +
+  labs(title = "Bathroom Site sampled locations in San Francisco")
+
+```
+
+
 
 
 
