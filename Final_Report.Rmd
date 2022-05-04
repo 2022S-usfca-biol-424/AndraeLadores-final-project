@@ -48,7 +48,7 @@ Add text here.
 ```{r read-in-bathroom-count-and-bathroom-sample-datasets}
 # read in entire bathroom count data
 bathroom_count <- read_csv(
-  "data/raw_data/2022-05-03_2022_spring_urban_ecology_data_Bathroom_count.csv")
+  "data/raw_data/2022-05-04_2022_spring_urban_ecology_data_Bathroom_count.csv")
 
 # read in entire bathroom sample data
 bathroom_sample <- read_csv(
@@ -147,15 +147,25 @@ ggmap(sf_basemap) +
   geom_point(data = bathroom_sample,
              aes(x = long_dec_degrees,
                  y = lat_dec_degrees,
-                 color = neighborhood),
-             size = 6) +
-  labs(title = "Bathroom Site sampled locations in San Francisco")
-
+                 color = neighborhood,
+                 shape = bathroom_type),
+             size = 3) +
+  labs(title = "Site sampling locations in San Francisco",
+       x = "Longitude",
+       y = "Latitude")
 ```
 
-
-
-
+```{r scatter-plot-and-regression-line-mean-median-income-and-total-colony}
+ bathroom_count %>%
+    ggplot(aes(y = colony_count_per_plate, # plot sample type data
+               x = mean_median_income)) + # plot colony count data
+    geom_point(color = "black") +
+    geom_smooth(method = 'lm', se = FALSE, color = "purple") +
+    labs(title = "Total Colony Count On Bathroom Based On
+      The Mean Median Income of San Francisco Neighborhoods",
+       x = "Mean Median Income",
+       y = "Total Colony Count")
+```
 
 # Results
 
