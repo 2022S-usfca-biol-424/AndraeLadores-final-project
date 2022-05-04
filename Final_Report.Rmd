@@ -51,7 +51,8 @@ bathroom_count <- read_csv(
   "data/raw_data/2022-05-03_2022_spring_urban_ecology_data_Bathroom_count.csv")
 
 # read in entire bathroom sample data
-bathroom_sample <- read_csv()
+bathroom_sample <- read_csv(
+  "data/raw_data/2022-05-03_2022_spring_urban_ecology_data_Bathroom_sample.csv")
 ```
 
 ```{r boxplot-total-colony-count-and-neighborhood}
@@ -146,7 +147,7 @@ ggmap(sf_basemap) +
   geom_point(data = bathroom_sample,
              aes(x = long_dec_degrees,
                  y = lat_dec_degrees,
-                 color = neighborhood | bathroom_type),
+                 color = neighborhood),
              size = 6) +
   labs(title = "Bathroom Site sampled locations in San Francisco")
 
