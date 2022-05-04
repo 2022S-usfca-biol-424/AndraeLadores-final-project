@@ -45,10 +45,13 @@ Add text here.
 
 ## Data Analysis and Statistics
 
-```{r read-in-bathroom-count}
+```{r read-in-bathroom-count-and-bathroom-sample-datasets}
 # read in entire bathroom count data
 bathroom_count <- read_csv(
-  "data/raw_data/2022_04-27-2022_spring_urban_ecology_data_ bathroom_count.csv")
+  "data/raw_data/2022-05-03_2022_spring_urban_ecology_data_Bathroom_count.csv")
+
+# read in entire bathroom sample data
+bathroom_sample <- read_csv()
 ```
 
 ```{r boxplot-total-colony-count-and-neighborhood}
@@ -66,11 +69,12 @@ ggplot(data = bathroom_count,
 ```
 
 ```{r run-anova-on-colony-count-and-neighborhood}
+# statistical test to see if above results are significant. 
 summary(lm(data=bathroom_count, colony_count_per_plate ~ neighborhood))
 ```
 
 ```{r boxplot-total-colony-count-and-sink-location}
-# create boxplot with total plate count and the different sink locations
+# create boxplot with total plate count and the different sink locations.
 bathroom_count %>%
   filter(sample %in% c("s1", "s2", "s3")) %>%
   ggplot(aes(x = sample, y = colony_count_per_plate, color = sample)) + 
@@ -82,9 +86,49 @@ bathroom_count %>%
 
 ```
 
-```{r table-morphology-type-and-morphology-count}
-
+```{r boxplot-total-colony-count-only-civic-center-and-outer-richmond}
+# create boxplot for the total colony count for only Civic Center and
+# Outer Richmond neighborhoods.
+bathroom_count %>%
+  filter(neighborhood %in% c("OR", "CC")) %>%
+  ggplot(aes(x = neighborhood, 
+             y = colony_count_per_plate, 
+             color = neighborhood)) +
+  geom_boxplot() +
+  scale_y_log10() +
+  labs (x = "Neighborhood",
+        y = "Total Colony Count",
+        title = 
+          "Count of bacterial colonies in Outer Richmond and Civic Center")
 ```
+
+
+```{r table-morphology-type-and-morphology-count}
+# subset bathroom count data to only contain morphotype ID and morphotype count.
+# Then only have the top 10 morphotype counts.
+bathroom_count_table <- bathroom_count %>%
+  select(morphotype_id, morphotype_count) %>%
+  arrange(desc(morphotype_count)) %>%
+  head(10)
+```
+
+```{r create-barplot-for-morphotype-id-and-counts}
+# create barplot that showcases the top morphotype IDs and their counts.
+bathroom_count_barplot <- ggplot(data = bathroom_count_table,
+                                   aes(x = morphotype_id,
+                                       y = morphotype_count,
+                                       fill = morphotype_id)) +
+  geom_bar(stat='identity') +
+    scale_fill_manual(values=c("#CDCDC1",
+                               "#CDB38B",
+                               "#9FB6CD",
+                               "#CDCD00")) +
+    labs(title = "Bacterial Morphotype description and its specific count",
+         x = "Morphotype Description",
+         y = "Morphotype Count")
+bathroom_count_barplot
+```
+
 
 
 # Results
