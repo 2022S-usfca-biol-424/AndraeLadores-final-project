@@ -166,6 +166,21 @@ ggmap(sf_basemap) +
        x = "Mean Median Income",
        y = "Total Colony Count")
 ```
+```{r scatter-plot-and-regression-line-mean-median-population-and-total-colony}
+bathroom_count %>%
+filter(sample_type %in% c("s", "f", "t")) %>%
+  ggplot(aes(y = mean_median_population, # plot poulation
+             x = colony_count_per_plate,
+             color = bathroom_type)) + 
+  geom_point() +
+  geom_smooth(method = 'lm', se = FALSE, color = "#B03060") +
+  labs(title = "Total Colony Count On Bathroom Based On
+      The Average Population of San Francisco Neighborhoods",
+      x = "Average Population",
+      y = "Total Colony Count")
+
+```
+
 
 # Results
 
