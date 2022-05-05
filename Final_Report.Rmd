@@ -11,6 +11,19 @@ output: word_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r load-packages}
+# If you add any additional packages here, make sure they are
+# also listed in the DESCRIPTION file
+library("dplyr")
+library("tidyr")
+library("ggplot2")
+library("readr")
+library("ggmap")
+library("tidycensus")
+library("tidyverse")
+census_api_key("90f27dca0437203c57cb264c2b8efccbf7056737")
+```
+
 # Introduction
 Throughout the world and including the United States, there are numerous individuals that are deprived of safe and reliable tap water. Cities like Newark, New Jersey and Flint, Michigan are only some examples of the water crisis in the United States [@doi:10.2105/AJPH.2021.306561]. In California, there is a small percentage of public tap water systems that have been found to be in violation at least one point in their time since 2012 [@reese2018does]. Further studies have revealed that water system violations in California transpire in low-income communities, where there are limited resources which makes it difficult to meet the standards, driving the inequitable access to safe tap water [@balazs2012environmental; @doi:10.2105/AJPH.2013.301664]. 
 Besides access to safe public water, public restrooms are a necessity as well. They provide service to a mobile population and assists the individuals with greater needs (children, elderly, the homeless, etc.) [@STANWELLSMITH2010613]. In addition, public restrooms in high-income locations are known to display cleaner facilities and conditions compared to the restrooms in low and medium-income areas [@suen2019public].
@@ -47,11 +60,11 @@ Add text here.
 
 ```{r read-in-bathroom-count-and-bathroom-sample-datasets}
 # read in entire bathroom count data
-bathroom_count <- read_csv(
+bathroom_count <- read.csv(
   "data/raw_data/2022-05-04_2022_spring_urban_ecology_data_Bathroom_count.csv")
 
 # read in entire bathroom sample data
-bathroom_sample <- read_csv(
+bathroom_sample <- read.csv(
   "data/raw_data/2022-05-03_2022_spring_urban_ecology_data_Bathroom_sample.csv")
 ```
 
@@ -68,25 +81,12 @@ ggplot(data = bathroom_count,
         title = "Count of Total Bacterial Colonies On Different Neighborhoods",
         scale_fill_manual = 'Neighborhoods')
 ```
+**Figure 1**: The total bacterial colony count was significantly different throughout the various San Francisco neighborhoods (ANOVA p < 0.05). 
 
 ```{r run-anova-on-colony-count-and-neighborhood}
 # statistical test to see if above results are significant. 
 summary(lm(data=bathroom_count, colony_count_per_plate ~ neighborhood))
 ```
-
-```{r boxplot-total-colony-count-and-sink-location}
-# create boxplot with total plate count and the different sink locations.
-bathroom_count %>%
-  filter(sample %in% c("s1", "s2", "s3")) %>%
-  ggplot(aes(x = sample, y = colony_count_per_plate, color = sample)) + 
-  geom_boxplot() +
-  labs(x = "Sink Location",
-       y = "Total Colony Count",
-       title = 
-         "Count of Total Bacterial Colonies on Different Locations On The Sink")
-
-```
-
 ```{r boxplot-total-colony-count-only-civic-center-and-outer-richmond}
 # create boxplot for the total colony count for only Civic Center and
 # Outer Richmond neighborhoods.
@@ -102,7 +102,35 @@ bathroom_count %>%
         title = 
           "Count of bacterial colonies in Outer Richmond and Civic Center")
 ```
+**Figure 2**: The total bacterial colony count was significantly different between Civic Center and Outer Richmond neighborhoods (t-test p < 0.05). 
+```{r run-t-test-on-colony-count-and-neighborhood}
+# statistical test to see if above results are significant. 
+bathroom_count %>%
+  filter(neighborhood %in% c("OR", "CC")) %>% 
+  lm(data = ., colony_count_per_plate ~ neighborhood) %>% 
+  summary()
+```
 
+```{r boxplot-total-colony-count-and-sink-location}
+# create boxplot with total plate count and the different sink locations.
+bathroom_count %>%
+  filter(sample %in% c("s1", "s2", "s3")) %>%
+  ggplot(aes(x = sample, y = colony_count_per_plate, color = sample)) + 
+  geom_boxplot() +
+  labs(x = "Sink Location",
+       y = "Total Colony Count",
+       title = 
+         "Count of Total Bacterial Colonies on Different Locations On The Sink")
+
+```
+**Figure 3**: The total bacterial colony count was not significantly different between various sink locations (ANOVA p < 0.05). 
+```{r run-anova-on-colony-count-and-sink-locations}
+# statistical test to see if above results are significant. 
+bathroom_count %>%
+  filter(sample %in% c("s1", "s2", "s3")) %>%
+  lm(data = ., colony_count_per_plate ~ sample) %>% 
+  summary()
+```
 
 ```{r table-morphology-type-and-morphology-count}
 # subset bathroom count data to only contain morphotype ID and morphotype count.
@@ -129,7 +157,7 @@ bathroom_count_barplot <- ggplot(data = bathroom_count_table,
          y = "Morphotype Count")
 bathroom_count_barplot
 ```
-
+**Figure 4**: Barplot of the top ten morphotype descriptions. 
 ```{r sf-base-map}
 # load in base sf map
 sf_basemap <- ggmap::get_stamenmap(bbox = c(-122.533264,
@@ -154,6 +182,7 @@ ggmap(sf_basemap) +
        x = "Longitude",
        y = "Latitude")
 ```
+**Figure 5**: Sampled Bathroom Sites throughout San Francisco's neighborhoods.
 
 ```{r scatter-plot-and-regression-line-mean-median-income-and-total-colony}
  bathroom_count %>%
@@ -166,9 +195,14 @@ ggmap(sf_basemap) +
        x = "Mean Median Income",
        y = "Total Colony Count")
 ```
+**Figure 6**: The total bacterial colony count was significantly different throughout the varied income (p < 0.05). 
+```{r run-statistical-test-for-total-colony-count-and-average-income}
+# statistical test to see if above results are significant. 
+summary(lm(data=bathroom_count, colony_count_per_plate ~ mean_median_income))
+```
+
 ```{r scatter-plot-and-regression-line-mean-median-population-and-total-colony}
 bathroom_count %>%
-filter(sample_type %in% c("s", "f", "t")) %>%
   ggplot(aes(y = mean_median_population, # plot poulation
              x = colony_count_per_plate,
              color = bathroom_type)) + 
@@ -180,6 +214,13 @@ filter(sample_type %in% c("s", "f", "t")) %>%
       y = "Total Colony Count")
 
 ```
+**Figure 7**: The total bacterial colony count was significantly different throughout the average population (p < 0.05). 
+```{r run-statistical-test-for-total-colony-count-and-average-population}
+# statistical test to see if above results are significant. 
+bathroom_count %>%
+  lm(data = ., colony_count_per_plate ~ mean_median_population) %>% 
+  summary()
+```
 
 
 # Results
@@ -187,19 +228,6 @@ filter(sample_type %in% c("s", "f", "t")) %>%
 ## Subsections are ok in the results section too
 
 Add a number of code chunks in the Results section. These should read in, subset and plot the data as needed (no need to save any figures to pdf, since they will be put into the rendered document when you click 'knit'), and, for any hypotheses that you want to test, an appropriate statistical test. 
-
-```{r load-packages}
-# If you add any additional packages here, make sure they are
-# also listed in the DESCRIPTION file
-library("dplyr")
-library("tidyr")
-library("ggplot2")
-library("readr")
-library("ggmap")
-library("tidycensus")
-library("tidyverse")
-census_api_key("90f27dca0437203c57cb264c2b8efccbf7056737")
-```
 
 # Discussion
 
