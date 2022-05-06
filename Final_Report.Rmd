@@ -80,6 +80,7 @@ ggplot(data = bathroom_count,
        title = "Count of Total Bacterial Colonies On Different Neighborhoods",
        scale_fill_manual = "Neighborhoods")
 ```
+
 **Figure 1**: The total bacterial colony count was significantly different throughout the various San Francisco neighborhoods (ANOVA p < 0.05). 
 
 ```{r run-anova-on-colony-count-and-neighborhood}
@@ -100,6 +101,7 @@ bathroom_count %>%
        y = "Total Colony Count",
        title = "Count of Bacterial Colonies In Outer Richmond and Civic Center")
 ```
+
 **Figure 2**: The total bacterial colony count was significantly different between Civic Center and Outer Richmond neighborhoods (t-test p < 0.05). 
 ```{r run-t-test-on-colony-count-and-neighborhood}
 # statistical test to see if above results are significant.
@@ -121,6 +123,7 @@ bathroom_count %>%
          "Count of Total Bacterial Colonies On Different Locations On The Sink")
 
 ```
+
 **Figure 3**: The total bacterial colony count was not significantly different between various sink locations (ANOVA p < 0.05). 
 ```{r run-anova-on-colony-count-and-sink-locations}
 # statistical test to see if above results are significant.
@@ -155,7 +158,9 @@ bathroom_count_barplot <- ggplot(data = bathroom_count_table,
          y = "Morphotype Count")
 bathroom_count_barplot
 ```
+
 **Figure 4**: Barplot of the top ten morphotype descriptions. 
+
 ```{r sf-base-map}
 # load in base sf map
 sf_basemap <- ggmap::get_stamenmap(bbox = c(-122.533264,
@@ -180,6 +185,7 @@ ggmap(sf_basemap) +
        x = "Longitude",
        y = "Latitude")
 ```
+
 **Figure 5**: Sampled Bathroom Sites throughout San Francisco's neighborhoods.
 
 ```{r scatter-plot-and-regression-line-mean-median-income-and-total-colony}
@@ -193,7 +199,9 @@ ggmap(sf_basemap) +
        x = "Mean Median Income",
        y = "Total Colony Count")
 ```
+
 **Figure 6**: The total bacterial colony count was significantly different throughout the varied average income (p < 0.05). 
+
 ```{r run-statistical-test-for-total-colony-count-and-average-income}
 # statistical test to see if above results are significant.
 summary(lm(data = bathroom_count, colony_count_per_plate ~ mean_median_income))
@@ -212,7 +220,9 @@ bathroom_count %>%
       y = "Total Colony Count")
 
 ```
+
 **Figure 7**: The total bacterial colony count was significantly different throughout the average population (p < 0.05). 
+
 ```{r run-statistical-test-for-total-colony-count-and-average-population}
 # statistical test to see if above results are significant.
 bathroom_count %>%
