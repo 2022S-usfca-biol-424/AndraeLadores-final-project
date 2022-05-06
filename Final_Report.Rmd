@@ -48,23 +48,22 @@ Once I returned from the sample sites with my centrifuge tubes, I vortexed each 
 
 After the incubation period, the plates are taken out for observation. Each plate is carefully observed and recorded for bacterial richness. I documented the morphology type of each bacteria, the count of each morphology type on the plate, and the overall total bacterial count present on each plate. After each plate is carefully studied and documented, the plate is properly discarded. 
 
-## Site Locations and Descriptions
-
-Add text here.
+## Statistical Analysis
+To analyze the data accumulated throughout the field work, I used boxplots, barplots, map figures, and scatterplots to illustrate my findings. For the boxplot figures created, I ran an ANOVA for the figures that contained three or more categorical variables to test for significance. For the boxplots that contained just two categorical variables, I used an independent t-test to test for significance. For the barplot figure, I subsetted the morphotype description names and their count, then I took the top ten morphotype count and plotted the results into a barplot to visualize the most abundant morphotypes. In terms of the scatterplots and regression lines, I used a paired t-test to determine significance. For all the statistical analysis to determine significance, I used a level of significance of 0.05.
 
 ## Field Sampling Design
 
 Add text here.
 
-## Data Analysis and Statistics
+## Data Analysis
 
 ```{r read-in-bathroom-count-and-bathroom-sample-datasets}
 # read in entire bathroom count data
-bathroom_count <- read.csv(
+bathroom_count <- read_csv(
   "data/raw_data/2022-05-04_2022_spring_urban_ecology_data_Bathroom_count.csv")
 
 # read in entire bathroom sample data
-bathroom_sample <- read.csv(
+bathroom_sample <- read_csv(
   "data/raw_data/2022-05-03_2022_spring_urban_ecology_data_Bathroom_sample.csv")
 ```
 
@@ -149,9 +148,9 @@ bathroom_count_barplot <- ggplot(data = bathroom_count_table,
                                        fill = morphotype_id)) +
   geom_bar(stat='identity') +
     scale_fill_manual(values=c("#CDCDC1",
-                               "#CDCD00",
                                "#CDB38B",
-                               "#9FB6CD")) +
+                               "#9FB6CD",
+                               "#CDCD00")) +
     labs(title = "Bacterial Morphotype description and its specific count",
          x = "Morphotype Description",
          y = "Morphotype Count")
@@ -195,7 +194,7 @@ ggmap(sf_basemap) +
        x = "Mean Median Income",
        y = "Total Colony Count")
 ```
-**Figure 6**: The total bacterial colony count was significantly different throughout the varied income (p < 0.05). 
+**Figure 6**: The total bacterial colony count was significantly different throughout the varied average income (p < 0.05). 
 ```{r run-statistical-test-for-total-colony-count-and-average-income}
 # statistical test to see if above results are significant. 
 summary(lm(data=bathroom_count, colony_count_per_plate ~ mean_median_income))
@@ -203,7 +202,7 @@ summary(lm(data=bathroom_count, colony_count_per_plate ~ mean_median_income))
 
 ```{r scatter-plot-and-regression-line-mean-median-population-and-total-colony}
 bathroom_count %>%
-  ggplot(aes(y = mean_median_population, # plot poulation
+  ggplot(aes(y = mean_median_population, # plot population
              x = colony_count_per_plate,
              color = bathroom_type)) + 
   geom_point() +
@@ -222,12 +221,16 @@ bathroom_count %>%
   summary()
 ```
 
-
 # Results
 
-## Subsections are ok in the results section too
+## Microbial Richness
+I observed that the overall bacterial richness throughout the sampled bathroom and their neighborhoods (Figure 5) was significantly different with an ANOVA p-value of 2.17E-6; p < 0.05 (Figure 1). Comparing two specific neighborhood’s bacterial richness, Outer Richmond and Civic Center/Tenderloin, with differing average income, I found that the bacterial richness was significantly different between Civic Center/Tenderloin and Outer Richmond area with a t-test p-value of 0.02708; p < 0.05 (Figure 2). Furthermore, I observed the relationship between the bacterial richness and the varying sink locations and found that the bacterial richness was not significantly different between the various sink locations (Figure 3; p-value = 0.6912; p < 0.05). 
 
-Add a number of code chunks in the Results section. These should read in, subset and plot the data as needed (no need to save any figures to pdf, since they will be put into the rendered document when you click 'knit'), and, for any hypotheses that you want to test, an appropriate statistical test. 
+## Morphotypes
+My barplot (Figure 4) to analyze the top morphotype count of the various morphotype identification descriptions and their respective bacterial abundance, found that the morphotype identification, tiny, taupe, had the most frequent and abundant morphotype count of 14,032. The second most abundant morphotype, tiny, yellow, amounted to a morphotype count of 3,116. That is a 10,916 difference between the most abundant morphotype, tiny, taupe, and the second most abundant morphotype, tiny, yellow. Furthermore, the morphotypes, tiny, transparent, totaled to the value of 2,288 and small, opaque, measured to a total of 1728.
+
+## Average Income & Population
+The scatterplot to measure the microbial richness along with the average income in San Francisco’s neighborhoods was significantly different with a p-value of 0.006631; p < 0.05 (Figure 6). Similarly, the relationship between the microbial richness and the average population throughout San Francisco was significant, it had a t-test value of p-value of 3.024E-6, p < 0.05 (Figure 7).
 
 # Discussion
 
