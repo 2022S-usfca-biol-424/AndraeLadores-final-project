@@ -1,14 +1,14 @@
 ---
 title: "Bacterial richness in public tap water and sinks of San Francisco's public Pit Stop bathrooms"
 author: "Andrae Ladores"
-date: "April 4, 2022"
+date: "May 9, 2022"
 bibliography: references.bib
 csl: ecology.csl
 output: word_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
 ```{r load-packages}
@@ -28,7 +28,7 @@ census_api_key("90f27dca0437203c57cb264c2b8efccbf7056737")
 Throughout the world and including the United States, there are numerous individuals that are deprived of safe and reliable tap water. Cities like Newark, New Jersey and Flint, Michigan are only some examples of the water crisis in the United States [@doi:10.2105/AJPH.2021.306561]. In California, there is a small percentage of public tap water systems that have been found to be in violation at least one point in their time since 2012 [@reese2018does]. The United States Environmental Protection Agency dataset was observed for the violations committed by community water systems and 55% of community water systems violated at least one statute under the Safe Drinking Water Act which served over 95 million individuals[@8847909620130301]. Additional studies have revealed that water system violations in California transpire in low-income communities, where there are limited resources which makes it difficult to meet the standards, driving the inequitable access to safe tap water [@balazs2012environmental; @doi:10.2105/AJPH.2013.301664]. 
 Besides access to safe public water, public restrooms are a necessity as well. They provide service to a mobile population and assists the individuals with greater needs (children, elderly, the homeless, etc.) [@STANWELLSMITH2010613]. Despite the essentiality of restrooms, they are an optimal place to cultivate the growth and survival of microorganisms due to the humid and warm conditions of a bathroom. A majority of pathogens acquired in some form of health-facility (like a hospital) can survive on inanimate surfaces for weeks or months, possibly serving as a source of transmission unless frequent object/surface disinfections are performed [@kramer2006long; @OTTER2013S6]. Cleaning restrooms without the use of disinfectants and only with soaps or detergents can spread viruses and bacterias throughout the area [@abney2021toilet]. In addition, public restrooms in high-income locations are known to display cleaner facilities and conditions compared to the restrooms in low and medium-income areas [@suen2019public].
 
-In this study, I focused on the bacterial richness in public tap water of San Francisco's public restrooms (Pit Stop bathrooms) and how they vary regarding population density and the average neighborhood income. The study revolves around the use of field collected data across several districts of San Francisco and the use of pre-existing datasets relating to the study of different urban systems. The field collected data consisted of tap water samples of Pit Stop bathrooms along with swab samples of distinct areas on the sink in the same bathrooms. The publicly-available datasets online consisted of information pertaining to SF's average neighborhood income values and SF's census data, obtained from the 2010 Census and 2020 American Community Survey data.   
+In this study, I focused on the bacterial richness in public tap water of San Francisco's public restrooms (Pit Stop bathrooms) and how they vary regarding population density and the average neighborhood income. The study revolves around the use of field collected data across several districts of San Francisco and the use of pre-existing datasets relating to the study of different urban systems. The field collected data consisted of tap water samples of Pit Stop bathrooms along with swab samples of distinct areas on the sink in the same bathrooms. The publicly-available datasets online consisted of information pertaining to San Francisco's average neighborhood income values and San Francisco census data, obtained from the 2010 Census and 2020 American Community Survey data.   
 
 # Materials and Methods
 
@@ -49,16 +49,13 @@ Once I returned from the sample sites with my centrifuge tubes, I vortexed each 
 After the incubation period, the plates are taken out for observation. Each plate is carefully observed and recorded for bacterial richness. I documented the morphology type of each bacteria, the count of each morphology type on the plate, and the overall total bacterial count present on each plate. After each plate is carefully studied and documented, the plate is properly discarded. 
 
 ## Public Datasets
-The public datasets used in this study were mainly the 2010 American Decennial Census and the 2020 American Community Survey, which can both be obtained from the Census website: https://www.census.gov. The 2010 Census data was used to illustrate the average population density throughout San Francisco and the 2020 American Community Survey was used to display the average income data depending on San Francisco's neighborhood tracts. The 2010 Census data was used instead of the 2020 Census data due to the lack of data available for the 2020 Census dataset at the time. Additionally, I used Analysis Neighborhood and PitStop datasets, obtained from https://datasf.org, to create the map and neighborhood figures. 
+The public datasets used in this study were mainly the 2010 American Decennial Census and the 2020 American Community Survey, which can both be obtained from the Census website: https://www.census.gov. The 2010 Census data was used to illustrate the average population density throughout San Francisco and the 2020 American Community Survey was used to display the average income data depending on San Francisco's neighborhood tracts. The 2010 Census data was used instead of the 2020 Census data due to the lack of data available for the 2020 Census dataset at the time. Additionally, I used Analysis Neighborhood and PitStop datasets, obtained from https://datasf.org, to create the map and neighborhood figures. It is important to note that when using the American Community Survey and Census data, tracts were used instead of neighborhood districts, which should more accurately measure the income and population density data since tracts are smaller than neighborhood districts.
+
 
 ## Statistical Analysis
-To analyze the data accumulated throughout the field work, I used boxplots, barplots, map figures, and scatterplots to illustrate my findings. For the boxplot figures created, I ran an ANOVA for the figures that contained three or more categorical variables to test for significance. For the boxplots that contained just two categorical variables, I used an independent t-test to test for significance. For the barplot figure, I subsetted the morphotype description names and their count, then I took the top ten morphotype count and plotted the results into a barplot to visualize the most abundant morphotypes. In terms of the scatterplots and regression lines, I used a paired t-test to determine significance. For all the statistical analysis to determine significance, I used a level of significance of 0.05.
+To analyze the data accumulated throughout the field work, I used boxplots, barplots, map figures, and scatterplots to illustrate my findings using R and the R package, ggplot2. When statistically analyzing my figures, I used R code to calculate the necessary p-value to test for significance. For the boxplot figures created, I ran an ANOVA for the figures that contained three or more categorical variables to test for significance. For the boxplots that contained just two categorical variables, I used an independent t-test to test for significance. For the barplot figure, I subsetted the morphotype description names and their count, then I took the top ten morphotype count and plotted the results into a barplot to visualize the most abundant morphotypes. In terms of the scatterplots and regression lines, I used a paired t-test to determine significance. For all the statistical analysis to determine significance, I used a level of significance of 0.05.
 
-## Field Sampling Design
-
-Add text here.
-
-## Data Analysis
+# Figures and Data Analysis
 
 ```{r read-in-bathroom-count-and-bathroom-sample-datasets}
 # read in entire bathroom count data
@@ -86,7 +83,7 @@ ggplot(data = bathroom_count,
 
 **Figure 1**: The total bacterial colony count was significantly different throughout the various San Francisco neighborhoods (ANOVA p < 0.05). 
 
-```{r run-anova-on-colony-count-and-neighborhood}
+```{r run-anova-on-colony-count-and-neighborhood, include= FALSE}
 # statistical test to see if above results are significant.
 summary(lm(data = bathroom_count, colony_count_per_plate ~ neighborhood))
 ```
@@ -107,7 +104,7 @@ bathroom_count %>%
 ```
 
 **Figure 2**: The total bacterial colony count was significantly different between Civic Center and Outer Richmond neighborhoods (t-test p < 0.05). 
-```{r run-t-test-on-colony-count-and-neighborhood}
+```{r run-t-test-on-colony-count-and-neighborhood, include= FALSE}
 # statistical test to see if above results are significant.
 bathroom_count %>%
   filter(neighborhood %in% c("OR", "CC")) %>%
@@ -129,7 +126,7 @@ bathroom_count %>%
 ```
 
 **Figure 3**: The total bacterial colony count was not significantly different between various sink locations (ANOVA p < 0.05). 
-```{r run-anova-on-colony-count-and-sink-locations}
+```{r run-anova-on-colony-count-and-sink-locations, include= FALSE}
 # statistical test to see if above results are significant.
 bathroom_count %>%
   filter(sample %in% c("s1", "s2", "s3")) %>%
@@ -200,13 +197,13 @@ ggmap(sf_basemap) +
     geom_smooth(method = "lm", se = FALSE, color = "purple") +
     labs(title = "Total Colony Count On Bathroom Based On
       The Mean Median Income of San Francisco Neighborhoods",
-       x = "Mean Median Income",
+       x = "Average Income",
        y = "Total Colony Count")
 ```
 
 **Figure 6**: The total bacterial colony count was significantly different throughout the varied average income (p < 0.05). 
 
-```{r run-statistical-test-for-total-colony-count-and-average-income}
+```{r run-statistical-test-for-total-colony-count-and-average-income, include= FALSE}
 # statistical test to see if above results are significant.
 summary(lm(data = bathroom_count, colony_count_per_plate ~ mean_median_income))
 ```
@@ -227,7 +224,7 @@ bathroom_count %>%
 
 **Figure 7**: The total bacterial colony count was significantly different throughout the average population (p < 0.05). 
 
-```{r run-statistical-test-for-total-colony-count-and-average-population}
+```{r run-statistical-test-for-total-colony-count-and-average-population, include= FALSE}
 # statistical test to see if above results are significant.
 bathroom_count %>%
   lm(data = ., colony_count_per_plate ~ mean_median_population) %>%
@@ -240,12 +237,14 @@ bathroom_count %>%
 I observed that the overall bacterial richness throughout the sampled bathroom and their neighborhoods (Figure 5) was significantly different with an ANOVA p-value of 2.17E-6; p < 0.05 (Figure 1). Comparing two specific neighborhood’s bacterial richness, Outer Richmond and Civic Center/Tenderloin, with differing average income, I found that the bacterial richness was significantly different between Civic Center/Tenderloin and Outer Richmond area with a t-test p-value of 0.02708; p < 0.05 (Figure 2). From the highest median of bacterial richness to the smallest, San Francisco's neighborhood ranked the following: Mission, Marina, Castro, Haight, Outer Richmond, and Civic Center/Tenderloin (Figure 1). Furthermore, I observed the relationship between the bacterial richness and the varying sink locations and found that the bacterial richness was not significantly different between the various sink locations (Figure 3; p-value = 0.6912; p < 0.05). Sink location 3 had the highest median, followed by sink location 2, and finally sink location 1 which contained the lowest median value. 
 
 ## Morphotypes
-My barplot (Figure 4) to analyze the top morphotype count of the various morphotype identification descriptions and their respective bacterial abundance, found that the morphotype identification, *tiny, taupe*, had the most frequent and abundant morphotype count of 14,032. The second most abundant morphotype, *tiny, yellow*, amounted to a morphotype count of 3,116. That is a 10,916 difference between the most abundant morphotype, *tiny, taupe*, and the second most abundant morphotype, *tiny, yellow*. Furthermore, the morphotypes, *tiny, transparent*, totaled to the value of 2,288 and *small, opaque*, measured to a total of 1728.
+My barplot to analyze the top morphotype count of the various morphotype identification descriptions and their respective bacterial abundance (Figure 4), found that the morphotype identification, *tiny, taupe*, had the most frequent and abundant morphotype count of 14,032. The second most abundant morphotype, *tiny, yellow*, amounted to a morphotype count of 3,116. That is a 10,916 difference between the most abundant morphotype, *tiny, taupe*, and the second most abundant morphotype, *tiny, yellow*. Furthermore, the morphotypes, *tiny, transparent*, totaled to the value of 2,288 and *small, opaque*, measured to a total of 1728.
 
 ## Average Income & Population
-The scatterplot to measure the microbial richness along with the average income in San Francisco’s neighborhoods was significantly different with a p-value of 0.006631; p < 0.05 (Figure 6). Similarly, the relationship between the microbial richness and the average population throughout San Francisco was significant, it had a t-test value of p-value of 3.024E-6, p < 0.05 (Figure 7).
+The scatterplot to measure the microbial richness along with the average income in San Francisco’s neighborhoods was significantly different with a p-value of 0.006631; p < 0.05 (Figure 6). There was a higher colony count in areas of high average income (Figure 6). Similarly, the relationship between the microbial richness and the average population throughout San Francisco was significant, it had a t-test value of p-value of 3.024E-6; p < 0.05 (Figure 7). There was a higher number of total bacterial colonies in areas of low average population (Figure 7). 
 
 # Discussion
+
+
 
 # Sources Cited
 
