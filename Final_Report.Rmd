@@ -21,7 +21,7 @@ library("readr")
 library("ggmap")
 library("tidycensus")
 library("tidyverse")
-census_api_key("90f27dca0437203c57cb264c2b8efccbf7056737", install = TRUE)
+census_api_key("90f27dca0437203c57cb264c2b8efccbf7056737")
 ```
 
 # Introduction
