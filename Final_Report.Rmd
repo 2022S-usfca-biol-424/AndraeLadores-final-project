@@ -19,7 +19,7 @@ library("tidyr")
 library("ggplot2")
 library("readr")
 library("ggmap")
-library("tidycensus")
+library("tidyverse")
 ```
 
 # Introduction
